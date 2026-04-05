@@ -11,14 +11,10 @@
 
 1.  **[1. Project Overview](#1-project-overview)**
 2.  **[2. Dataset Description](#2-dataset-description)**
-3.  **[3. Expository Exploratory Data Analysis (EDA)](#3-expository-exploratory-data-analysis-eda)**
-    * [3.1 Columns: Defining Features](#31-columns)
-    * [3.2 Rules: Integrity & Logic](#32-rules)
-    * [3.3 Null Values: Quality Assessment](#33-null-values)
-4.  **[4. Identified Data Problems](#4-identified-data-problems)**
-5.  **[5. Data Cleaning Steps (SQL Workflow)](#5-data-cleaning-steps)**
-6.  **[6. Summary of Changes](#6-summary-of-changes)**
-7.  **[7. Final Verification](#7-final-verification)**
+3.  **[3. Identified Data Problems](#3-identified-data-problems)**
+4.  **[4. Data Cleaning Steps (SQL Workflow)](#4-data-cleaning-steps)**
+5.  **[5. Summary of Changes](#5-summary-of-changes)**
+6.  **[6. Final Verification](#6-final-verification)**
 
 ---
 
@@ -35,28 +31,8 @@ This documentation details the end-to-end cleaning process for the `messy patien
 
 ---
 
-## 3. Expository Exploratory Data Analysis (EDA)
 
-Using the foundational metrics of EDA, we inspected the data to understand its underlying structure and quality issues.
-
-### 3.1 Columns: Defining Features
-
-The dataset consists of **10 columns** capturing patient demographics and clinical visits. During the inspection, it was discovered that the column `pid` served as the primary key but lacked a professional naming convention. Furthermore, several numeric columns were improperly detected as `TEXT` due to mixed data types.
-
-### 3.2 Rules: Integrity & Logic
-
-We established the following rules to identify data "violations":
-* **Age Rule:** Must be a positive integer between 1 and 120. (Found violations: "0", "-5", "forty").
-* **Heart Rate Rule:** Must be a numeric value. (Found violations: "One hundred", "high").
-* **Diagnosis Rule:** Must be a clinical term. (Found violations: "??", "1234").
-
-### 3.3 Null Values: Quality Assessment
-
-A significant portion of the dataset (~30% of the 101 effective rows) contained missing values. EDA revealed that many "Nulls" were actually hidden behind string placeholders like `N/A`, `NaN`, `Unknown`, and `Z04`.
-
----
-
-## 4. Identified Data Problems
+## 3. Identified Data Problems
 * **Corrupted Suffixes:** Dates contained non-date characters (e.g., `2023-11-09abc`).
 * **Synonym Inflation:** High Blood Pressure was recorded in 5+ different ways (HBP, H.B.P, etc.).
 * **Non-Standard Numbers:** Ages and heart rates were written in words (e.g., "Twenty five") rather than digits.
@@ -64,7 +40,7 @@ A significant portion of the dataset (~30% of the 101 effective rows) contained 
 
 ---
 
-## 5. Data Cleaning Steps
+## 4. Data Cleaning Steps
 
 ### Step 1 — Schema Correction
 Renaming the primary identifier and disabling safe updates for bulk cleaning.
@@ -127,7 +103,7 @@ END;
 
 ---
 
-## 6. Summary of Changes
+## 5. Summary of Changes
 1.  **Identifier Updated:** `pid` successfully renamed to `ppid`.
 2.  **Logic Applied:** Word-based numbers ("Forty") were successfully converted to integers.
 3.  **Redundancy Removed:** Synonyms for Hypertension were merged into one group.
@@ -135,7 +111,7 @@ END;
 
 ---
 
-## 7. Final Verification
+## 6. Final Verification
 To ensure the data is now clean, the following audit query was executed:
 ```sql
 SELECT ppid, Age, Gender, Check_in_Date, Diagnosis, Heart_Rate 
