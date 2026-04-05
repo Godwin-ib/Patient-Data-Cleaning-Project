@@ -6,6 +6,36 @@
 **Author:** GODWIN IBRAHIM JOHN 
 **Date:** 3th April 2026  
 
+Below is the **Table of Contents** for your SQL Data Cleaning documentation. This is structured to be "GitHub-ready," using clickable anchor links that navigate through your professional report.
+
+---
+
+# 🏥 Table of Contents
+
+### **1. [Project Overview](#1-project-overview)**
+   - Summary of tools used and project objectives.
+
+### **2. [Dataset Description](#2-dataset-description)**
+   - Technical metadata: Table name, row count, and primary keys.
+
+### **3. [Data Quality Audit — Before Cleaning](#3-data-quality-audit--before-cleaning)**
+   - Initial findings on structural, inconsistency, and corruption issues.
+
+### **4. [Cleaning Steps (The SQL Workflow)](#4-cleaning-steps)**
+   - **Step 1: [Schema Setup & Safety](#step-1--schema-setup--safety)** *Renaming columns and configuring safe updates.*
+   - **Step 2: [Age Column](#step-2--age-column)** *Standardizing text-to-numeric strings and removing suffixes.*
+   - **Step 3: [Gender Column](#step-3--gender-column)** *Casing normalization and pattern grouping.*
+   - **Step 4: [Check-in Date Column](#step-4--check-in-date-column)** *String manipulation to strip corrupted suffixes.*
+   - **Step 5: [Diagnosis Column](#step-5--diagnosis-column)** *Clinical synonym consolidation and junk removal.*
+   - **Step 6: [Heart Rate Column](#step-6--heart-rate-column)** *Converting word-based numbers and filtering vague descriptors.*
+
+### **5. [Summary of All Changes](#5-summary-of-all-changes)**
+   - A concise list of the 5 major transformations performed.
+
+### **6. [Final Verification](#6-final-verification)**
+   - The validation query used to confirm the clean dataset state.
+
+
 ## 1. Project Overview
 This document records the complete data cleaning process performed on a healthcare dataset using **MySQL**. The raw data contained structural errors (corrupted column names), inconsistent text-based numbers, mixed-case categorical data, and invalid placeholders. 
 
